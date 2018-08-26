@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from '../../../store';
+
 import { of as observableOf, Observable } from 'rxjs';
+import { AppConfig } from '../../../models/app-config';
+import { NavRoute } from '../../../models/nav-route';
 
 @Component({
   selector: 'sx-main-page',
@@ -8,33 +13,7 @@ import { of as observableOf, Observable } from 'rxjs';
   styles: []
 })
 export class MainPageComponent implements OnInit {
-  navigation: Array<{ icon: string; route: string; title: string }> = [
-    {
-      icon: 'home',
-      route: '/',
-      title: 'Inicio'
-    },
-    {
-      icon: 'storage',
-      route: '/catalogos',
-      title: 'Productos'
-    },
-    {
-      icon: 'people',
-      route: '/proveedores',
-      title: 'Proveedores'
-    },
-    {
-      icon: 'shopping_cart',
-      route: '/ordenes',
-      title: 'Ordenes'
-    },
-    {
-      icon: 'my_library_books',
-      route: '/cxp',
-      title: 'Cuentas por pagar (CXP)'
-    }
-  ];
+  navigation$: Observable<NavRoute[]>;
 
   usermenu: Array<{ icon: string; route: string; title: string }> = [
     {
@@ -54,13 +33,14 @@ export class MainPageComponent implements OnInit {
     }
   ];
 
-  modulo$: Observable<string>;
+  appConfig$: Observable<AppConfig>;
 
   sidenavWidth = 300;
 
-  constructor() {}
+  constructor(private store: Store<fromRoot.State>) {}
 
   ngOnInit() {
-    this.modulo$ = observableOf('PENDIENTE');
+    this.appConfig$ = this.store.pipe(select(fromRoot.getAppConfig));
+    this.navigation$ = this.store.pipe(select(fromRoot.getMainNavigation));
   }
 }

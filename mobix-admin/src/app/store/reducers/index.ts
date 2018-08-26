@@ -3,8 +3,14 @@ import {
   RouterStateSnapshot,
   Params
 } from '@angular/router';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  createSelector
+} from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
+import * as fromApplication from './application.reducer';
+import { state } from '@angular/animations';
 
 export interface RouterStateUrl {
   url: string;
@@ -15,15 +21,29 @@ export interface RouterStateUrl {
 
 export interface State {
   routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
+  application: fromApplication.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  routerReducer: fromRouter.routerReducer
+  routerReducer: fromRouter.routerReducer,
+  application: fromApplication.reducer
 };
 
 export const getRouterState = createFeatureSelector<
   fromRouter.RouterReducerState<RouterStateUrl>
 >('routerReducer');
+
+export const getApplicationState = (state: State) => state.application;
+
+export const getAppConfig = createSelector(
+  getApplicationState,
+  fromApplication.getAppConfig
+);
+
+export const getMainNavigation = createSelector(
+  getApplicationState,
+  fromApplication.getMainNavigation
+);
 
 export class CustomSerializer
   implements fromRouter.RouterStateSerializer<RouterStateUrl> {
