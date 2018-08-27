@@ -1,7 +1,7 @@
-<td-layout-nav navigationRoute="/" color="primary">
+<td-layout-nav navigationRoute="/" color="primary" *ngIf="application$ | async as application">
 
   <div td-toolbar-content layout="row" layout-align="start center" flex>
-    <span class="cursor-pointer">SX_COMPRAS</span>
+    <span class="cursor-pointer">{{application.nombre}}</span>
     <span flex></span>
   </div>
 

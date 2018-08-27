@@ -2,14 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
+import * as fromRoot from 'app/store';
 import * as fromStore from '../../store';
+
 import { Observable } from 'rxjs';
+import { AppConfig } from '../../../models/app-config';
 
 @Component({
-  selector: 'sx-login-page',
+  selector: 'lx-login-page',
   templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
+  application$: Observable<AppConfig>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
   form: FormGroup;
@@ -19,6 +23,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.application$ = this.store.pipe(select(fromRoot.getAppConfig));
     this.loading$ = this.store.select(fromStore.getAuthLoading);
     this.error$ = this.store.pipe(select(fromStore.getAuthError));
 

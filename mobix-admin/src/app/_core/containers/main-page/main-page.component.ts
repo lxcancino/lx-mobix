@@ -8,7 +8,7 @@ import { AppConfig } from '../../../models/app-config';
 import { NavRoute } from '../../../models/nav-route';
 
 @Component({
-  selector: 'sx-main-page',
+  selector: 'lx-main-page',
   templateUrl: './main-page.component.html',
   styles: []
 })

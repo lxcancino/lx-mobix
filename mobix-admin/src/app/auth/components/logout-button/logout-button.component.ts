@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 
 @Component({
-  selector: 'sx-logout-button',
+  selector: 'lx-logout-button',
   template: `
     <a mat-icon-button matTooltip="Salir del sistema" (click)="logout()" >
       <mat-icon>exit_to_app</mat-icon>

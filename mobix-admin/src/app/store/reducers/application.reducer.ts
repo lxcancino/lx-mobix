@@ -16,6 +16,7 @@ export const initialState: State = {
   config: {
     nombre: 'App Nombre',
     descripcion: 'App Descripción',
+    header: 'App Header',
     version: '1.0.0'
   },
   mainNavigation: []
