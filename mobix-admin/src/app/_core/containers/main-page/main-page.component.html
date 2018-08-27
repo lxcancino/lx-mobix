@@ -1,0 +1,29 @@
+<td-layout #layout mode="over" opened="false" [sidenavWidth]="sidenavWidth" *ngIf="appConfig$ | async as application">
+
+  <div td-sidenav-content>
+    SideNac (Pendiente)
+  </div>
+
+  <td-navigation-drawer sidenavTitle="{{application.nombre}}" color="accent" navigationRoute="/" name="Operaciones" email="admin@gmail.com"
+    flex>
+
+    <div td-navigation-drawer-menu>
+      <mat-nav-list>
+        <a *ngFor="let item of usermenu" mat-list-item [routerLink]="[item.route]">
+          <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
+        </a>
+      </mat-nav-list>
+    </div>
+
+    <mat-nav-list>
+      <a *ngFor="let item of navigation$ | async" mat-list-item [routerLink]="[item.path]" (click)="layout.close()">
+        <mat-icon>{{item.icon}}</mat-icon>{{item.nombre}}
+      </a>
+    </mat-nav-list>
+
+  </td-navigation-drawer>
+  <router-outlet></router-outlet>
+
+
+
+</td-layout>
