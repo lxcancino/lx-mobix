@@ -1,0 +1,13 @@
+package com.luxsoft.lx.core
+
+public enum FormaDePago {
+
+	EFECTIVO
+	,DEPOSITO
+	,TRANSFERENCIA
+	,TARJETA_DE_CREDITO
+	,TARJETA_DE_DEBITO
+	,AMERICAN_EXPRESS
+	,CHEQUE
+	,CARGO_RECURRENTE
+}
